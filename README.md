@@ -1,5 +1,4 @@
-# Wholesale-Inventory-Management-System
-
+# Wholesale Inventory Management System
 ## Tech Stack: HTML / CSS / JS + PHP + MySQL (XAMPP)
 
 ---
@@ -23,6 +22,49 @@ wholesale-ims/
     ├── data.js             ← API endpoint URLs
     └── app.js              ← All CRUD logic (fetch-based)
 ```
+
+---
+
+## Setup Instructions (XAMPP)
+
+### Step 1 — Install XAMPP
+Download from: https://www.apachefriends.org
+Install and launch the XAMPP Control Panel.
+Start **Apache** and **MySQL**.
+
+### Step 2 — Copy the project
+Paste the `wholesale-ims` folder into:
+```
+C:\xampp\htdocs\wholesale-ims\
+```
+
+### Step 3 — Import the database
+1. Open your browser and go to: http://localhost/phpmyadmin
+2. Click **New** in the left sidebar
+3. Create a database named `wholesale_ims`
+4. Click the `wholesale_ims` database → go to **Import** tab
+5. Click **Choose File** → select `wholesale_ims.sql`
+6. Click **Go** to import
+
+### Step 4 — Run the app
+Open your browser and go to:
+```
+http://localhost/wholesale-ims/
+```
+
+---
+
+## Database Credentials (config/db.php)
+| Setting   | Default Value   |
+|-----------|-----------------|
+| Host      | localhost        |
+| Database  | wholesale_ims    |
+| Username  | root             |
+| Password  | *(empty)*        |
+
+If your XAMPP MySQL has a password set, update `DB_PASS` in `config/db.php`.
+
+---
 
 ## Features
 
@@ -49,3 +91,14 @@ wholesale-ims/
 - Low stock alert table
 
 ---
+
+## SQL Highlights (for your report)
+
+| Feature          | Location                  | Description                              |
+|------------------|---------------------------|------------------------------------------|
+| Primary Keys     | All tables                | `id` AUTO_INCREMENT                      |
+| Foreign Keys     | products.supplier_id      | References suppliers(id)                 |
+|                  | orders.product_id         | References products(id)                  |
+| Stored Procedure | sp_place_order            | Inserts order + deducts stock atomically |
+| Trigger          | trg_order_status_change   | Logs every order status change           |
+| CRUD             | api/*.php                 | Full Create/Read/Update/Delete via PDO   |
